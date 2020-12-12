@@ -6,6 +6,7 @@ const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
 const AuthRouter = require("./controllers/user");
+const PackageRouter = require("./controllers/package");
 const auth = require("./auth-middleware/index");
 
 //middleware
@@ -24,6 +25,7 @@ app.get("/", auth, (req, res) => {
 });
 
 app.use("/auth", AuthRouter); //only access authrouter when /auth is before it
+app.use("/package", PackageRouter);
 
 //listener
 app.listen(PORT, () => {
