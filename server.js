@@ -8,24 +8,27 @@ const cors = require("cors");
 const AuthRouter = require("./controllers/user");
 const PackageRouter = require("./controllers/package");
 const auth = require("./auth-middleware/index");
+const stripe = require("./controllers/stripe");
 
 //middleware
 app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json()); // <-- parse json bodies
 app.use(express.static("public"));
+app.use("/auth", AuthRouter);
 
 //routes
-// app.get("/", (req, res) => {
-// 	res.send("hello earth");
-// });
-
-app.get("/", auth, (req, res) => {
-	res.json(req.payload);
+app.get("/", (req, res) => {
+	res.json({ status: 200, msg: "hello earth" });
 });
 
-app.use("/auth", AuthRouter); //only access authrouter when /auth is before it
-app.use("/package", PackageRouter);
+// app.get("/", auth, (req, res) => {
+// 	res.json(req.payload);
+// });
+
+app.use("/package", PackageRouter); //only access packagerouter when /pachage is before it
+// app.use("/stripe-payment", auth, stripe);
+app.use("/subscribe", stripe);
 
 //listener
 app.listen(PORT, () => {
