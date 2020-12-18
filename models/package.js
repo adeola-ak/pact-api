@@ -15,7 +15,7 @@ const PackageSchema = new Schema(
 			trim: true,
 		},
 		value: { type: String, required: true, trim: true },
-		day_policy: { type: String, required: true, trim: true },
+		dayPolicy: { type: String, required: true, trim: true },
 	},
 	{ timestamps: true }
 );
