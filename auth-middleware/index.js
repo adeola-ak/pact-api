@@ -9,7 +9,7 @@ const auth = async (req, res, next) => {
 		//parse string to get the token
 		if (req.headers.authorization) {
 			const token = req.headers.authorization.split(" ")[1];
-			const payload = jwt.verify(token, SECRET);
+			const payload = await jwt.verify(token, SECRET);
 			if (payload) {
 				req.payload = payload;
 				next();

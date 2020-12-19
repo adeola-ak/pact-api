@@ -10,6 +10,7 @@ const UserSchema = new Schema(
 			trim: true,
 		},
 		password: { type: String, required: true },
+		subscription: { type: String, required: true },
 	},
 	{ timestamps: true }
 );

@@ -26,14 +26,10 @@ router.post("/login", async (req, res) => {
 				const token = await jwt.sign({ username }, SECRET);
 				res.status(200).json({ token });
 			} else {
-				res.status(400).json({
-					error: "INCORRECT PASSWORD. PLEASE TRY AGAIN",
-				});
+				res.status(400).json({ error: "PASSWORD DOES NOT MATCH" });
 			}
 		} else {
-			res.status(400).json({
-				error: "USER DOES NOT EXIST. PLEASE TRY AGAIN",
-			});
+			res.status(400).json({ error: "USER DOES NOT EXIST" });
 		}
 	} catch (error) {
 		res.status(400).json({ error });
