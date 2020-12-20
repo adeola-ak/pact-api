@@ -7,6 +7,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const AuthRouter = require("./controllers/user");
 const PackageRouter = require("./controllers/package");
+const StripeRouter = require("./controllers/stripe");
 const auth = require("./auth-middleware/index");
 // const stripe = require("./controllers/stripe");
 
@@ -27,8 +28,9 @@ app.get("/", auth, (req, res) => {
 
 app.use("/auth", AuthRouter);
 app.use("/package", PackageRouter); //only access packagerouter when /pachage is before it
-// app.use("/stripe-payment", auth, stripe);
-// app.use("/subscribe", stripe);
+app.use("/stripe", auth, StripeRouter);
+
+// app.use("/stripe", auth, StripeRouter);
 
 //listener
 app.listen(PORT, () => {
